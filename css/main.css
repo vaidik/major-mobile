@@ -1,0 +1,62 @@
+.header header {
+    background: url("../images/header.png") repeat-x scroll 0 0 / auto 100% transparent;
+    border: medium none;
+    color: #FFFFFF;
+    height: 4rem;
+    padding: 0 10px;
+}
+
+.header header:after {
+    background: url("../images/header-shadow.png") repeat-x scroll 0 0 / auto 100% transparent;
+    content: "";
+    display: block;
+    height: 0.3rem;
+    top: 4rem;
+    right: 0;
+    left: 0;
+    position: absolute;
+}
+
+.header header > h1 {
+    float: left;
+    font-size: 30px;
+}
+
+.header header > ul.user-nav {
+    float: right;
+    margin-top: 15px;
+}
+
+ul.user-nav {
+    
+}
+
+ul.user-nav > li {
+    display: inline-block;
+}
+
+footer {
+    bottom: 0;
+    height: 3rem;
+    position: fixed;
+    width: 100%;
+}
+
+[role="toolbar"] {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.85);
+    bottom: 0;
+    height: 2.5rem;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+#home-nav {
+    width: 60%;
+    margin: 30px auto;
+}
+
+#home-nav > li {
+    margin: 10px;
+}
