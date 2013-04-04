@@ -1,0 +1,38 @@
+/* Bootstrap Fixtures */
+textarea, input[type=text] {
+    width: calc(100% - 14px) !important;
+    width: -webkit-calc(100% - 14px) !important;
+    width: -moz-calc(100% - 14px) !important;
+    width: -o-calc(100% - 14px) !important;
+}
+
+.modal {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border: 0;
+}
+
+.modal-backdrop {
+    background-color: white;
+}
+
+.modal-backdrop, .modal-backdrop.fade.in {
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+
+.modal-header {
+    font-size: 18px;
+}
+
+.btn {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-border-radius: 0;
+}
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-border-radius: 0;
+}

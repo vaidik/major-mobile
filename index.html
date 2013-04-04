@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/fixtures.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 
@@ -24,27 +25,50 @@
                     <li><i class="icon-cog icon-2x"></i></li>
                 </ul>
             </header>
+        </section>
 
-            <div class="main">
-                <div class="home">
-                    <ul id="home-nav" class="nav">
-                        <li><a href="#" class="btn">Create Note</a></li>
-                        <li><a href="#" class="btn">Save Link</a></li>
-                        <li><a href="#" class="btn">Take Photo</a></li>
-                        <li><a href="#" class="btn">Record Audio</a></li>
-                        <li><a href="#" class="btn">Record Video</a></li>
-                    </ul>
-                </div>
+        <div class="screen-container">
+            <div class="home" role="screen">
+                <ul id="home-nav" class="nav">
+                    <li><a href="#" class="btn" id="notes">Create Note</a></li>
+                    <li><a href="#" class="btn" id="link">Save Link</a></li>
+                    <li><a href="#" class="btn">Take Photo</a></li>
+                    <li><a href="#" class="btn">Record Audio</a></li>
+                    <li><a href="#" class="btn">Record Video</a></li>
+                </ul>
             </div>
 
-            <footer>
-                <div role="toolbar">
-                    <ul>
-                        <li>List</li>
-                    </ul>
+            <div class="hide notes" role="screen">
+                <form method="POST" action="#">
+                    <div><input type="text" placeholder="Name" name="name"></div>
+                    <div><textarea name="note" placeholder="Notes..." style="height: 150px;"></textarea></div>
+                    <div><input type="text" name="tags" placeholder="Tags"></div>
+                </form>
+            </div>
+
+            <div class="hide list" role="screen">
+                Here comes the list...
+            </div>
+        </div>
+
+        <footer>
+            <div role="toolbar">
+                <div class="button" id="button-left" style="display: none;">
+                    <i class="icon-remove"></i>
                 </div>
-            </footer>
-        </section>
+                <ul class="nav">
+                    <li class="active"><i class="icon-home" id="home"></i></li>
+                    <li><i class="icon-list" id="list"></i></li>
+                </ul>
+                <div class="button" id="button-right" style="display: none;">
+                    <i class="icon-ok"></i>
+                </div>
+            </div>
+        </footer>
     </div>
+
+    <script type="text/javascript" src="js/vendor/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/screen.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
