@@ -31,7 +31,7 @@
             <div class="home" role="screen">
                 <ul id="home-nav" class="nav">
                     <li><a href="#" class="btn" id="notes">Create Note</a></li>
-                    <li><a href="#" class="btn" id="link">Save Link</a></li>
+                    <li><a href="#" class="btn" id="links">Save Link</a></li>
                     <li><a href="#" class="btn">Take Photo</a></li>
                     <li><a href="#" class="btn">Record Audio</a></li>
                     <li><a href="#" class="btn">Record Video</a></li>
@@ -41,6 +41,15 @@
             <div class="hide notes" role="screen">
                 <form method="POST" action="#">
                     <div><input type="text" placeholder="Name" name="name"></div>
+                    <div><textarea name="note" placeholder="Notes..." style="height: 150px;"></textarea></div>
+                    <div><input type="text" name="tags" placeholder="Tags"></div>
+                </form>
+            </div>
+
+            <div class="hide links" role="screen">
+                <form method="POST" action="#">
+                    <div><input type="text" placeholder="Name" name="name"></div>
+                    <div><input type="text" placeholder="Link" name="link"></div>
                     <div><textarea name="note" placeholder="Notes..." style="height: 150px;"></textarea></div>
                     <div><input type="text" name="tags" placeholder="Tags"></div>
                 </form>
