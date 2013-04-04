@@ -45,6 +45,32 @@ ul.user-nav > li {
 
 .screen-container {
     padding: 15px;
+    padding-bottom: 23px;
+}
+
+footer .button, footer ul.nav > li {
+    padding: 9px;
+    display: inline-block;
+}
+
+footer .button {
+    position: absolute;
+    width: 20px;
+    font-size: 18px;
+}
+
+footer #button-right {
+    right: 0;
+    box-shadow: 0px -2px 3px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: 0px -2px 3px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow: 0px -2px 3px rgba(255, 255, 255, 0.2);
+}
+
+footer #button-left {
+    box-shadow: 0px 2px 3px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: 0px 2px 3px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow: 0px 2px 3px rgba(255, 255, 255, 0.2);
+    left: 0;
 }
 
 footer {
@@ -57,7 +83,7 @@ footer {
 [role="toolbar"] {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.85);
     bottom: 0;
-    height: 1.5rem;
+    height: 38px;
     left: 0;
     position: fixed;
     width: 100%;
@@ -65,19 +91,19 @@ footer {
 
     text-align: center;
     color: white;
-    padding: 7px;
 }
 
 [role="toolbar"] ul {
     font-size: 1.6em;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 [role="toolbar"] ul > li {
     display: inline-block;
     padding-left: 4px;
     padding-right: 4px;
-    padding-top: 9px;
-    margin-top: -7px;
 }
 
 [role="toolbar"] ul i {
