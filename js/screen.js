@@ -17,11 +17,18 @@ function screen() {
 
 function navigation() {
     var navigation = {};
+    var $li = $('[role=toolbar] ul.nav li');
 
     navigation.switch = function(id) {
-        var $li = $('[role=toolbar] ul.nav li');
-        $li.removeClass('active');
+        navigation.empty();
         $('#' + id, $li).parent().addClass('active');
+        
+        return navigation;
+    }
+
+    navigation.empty = function() {
+        $li.removeClass('active');
+        return navigation;
     }
 
     return navigation;

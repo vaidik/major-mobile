@@ -72,7 +72,7 @@ footer {
     display: inline-block;
     padding-left: 4px;
     padding-right: 4px;
-    padding-top: 6px;
+    padding-top: 9px;
     margin-top: -7px;
 }
 
@@ -82,6 +82,7 @@ footer {
 
 [role="toolbar"] ul .active {
     border-top: 3px solid #C96A00;
+    padding-top: 6px;
 }
 
 #home-nav {
