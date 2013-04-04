@@ -43,6 +43,10 @@ ul.user-nav > li {
     display: inline-block;
 }
 
+.screen-container {
+    padding: 15px;
+}
+
 footer {
     bottom: 0;
     height: 3rem;
@@ -87,7 +91,7 @@ footer {
 
 #home-nav {
     width: 60%;
-    margin: 30px auto;
+    margin: 0 auto;
 }
 
 #home-nav > li {
