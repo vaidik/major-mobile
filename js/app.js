@@ -19,13 +19,25 @@
         screen().switch($(this).attr('id'));
         $('#button-left').show();
         $('#button-right').show();
-        console.log('asd');
-        History.pushState({state:1}, "Notes", "notes");
+        //History.pushState({state:1}, "Notes", "notes");
     });
 
     $('[role=toolbar] ul li').click(function() {
-        screen().switch($('i', this).attr('id'));
+        var id = $('i', this).attr('id');
+        screen().switch(id);
+        if (id == 'list') {
+            $('.screen-container').css('padding', 0);
+        } else {
+            $('.screen-container').css('padding', '');
+        }
         $('#button-left').css('display', 'none');
         $('#button-right').css('display', 'none');
+    });
+
+    $('#button-left').click(function() {
+        $('#button-left, #button-right').css('display', 'none');
+
+        screen().switch('home');
+        //History.back();
     });
 }(window));

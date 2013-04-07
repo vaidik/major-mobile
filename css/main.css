@@ -48,6 +48,61 @@ ul.user-nav > li {
     padding-bottom: 23px;
 }
 
+.list ul {
+    list-style: none;
+    margin: 0;
+}
+
+.list ul > li {
+    height: 60px;
+
+    font-size: 12px;
+
+    -webkit-box-shadow: 0px 2px 2px 0px rgba(20, 20, 20, 0.2);
+    box-shadow: 0px 2px 2px 0px rgba(20, 20, 20, 0.2);
+}
+
+.list ul > li .side-box {
+    height: 60px;
+    width: 60px;
+}
+
+.thumb {
+    float: left;
+}
+
+.thumb > i {
+    font-size: 30px;
+    margin: 14px
+}
+
+.tags {
+    float: right;
+}
+
+.list ul > li .content {
+    height: 48px;
+    display: inline-block;
+
+    /*
+     * 12px for the padding in content div
+     * 60px for each side-box
+     * 6px for the left and right border
+     */
+    width: calc(100% - 60px - 60px - 12px - 6px);
+    width: -webkit-calc(100% - 60px - 60px - 12px - 6px);
+}
+
+.list ul > li .content {
+    padding: 6px;
+}
+
+.list ul > li .name {
+    margin-top: 2px;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
 footer .button, footer ul.nav > li {
     padding: 9px;
     display: inline-block;
@@ -57,6 +112,7 @@ footer .button {
     position: absolute;
     width: 20px;
     font-size: 18px;
+    cursor: pointer;
 }
 
 footer #button-right {
