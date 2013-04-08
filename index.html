@@ -34,7 +34,6 @@
             <div class="home" role="screen">
                 <ul id="home-nav" class="nav">
                     <li><a class="btn" id="notes">Create Note</a></li>
-                    <li><a class="btn" id="links">Save Link</a></li>
                     <li><a class="btn" id="photo">Take Photo</a></li>
                     <li><a class="btn">Record Audio</a></li>
                     <li><a class="btn">Record Video</a></li>
@@ -71,31 +70,34 @@
                         </div>
 
                         <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="More Options">More <b class="caret"></b></a>
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title=""><i class="icon-align-left"></i> <b class="caret"></b></a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a data-edit="strikethrough" title="" data-original-title="Strikethrough"><i class="icon-strikethrough"></i> Strike Through</a></li>
+                                <li><a data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i> Left</a></li>
+                                <li><a data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i> Center</a></li>
+                                <li><a data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i> Right</a></li>
+                                <li><a data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i> Justify</a></li>
                                 <li><a class="" data-edit="indent" title="" data-original-title="Indent (Tab)"><i class="icon-indent-right"></i> Indent</a></li>
                                 <li><a class="" data-edit="outdent" title="" data-original-title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i> Outdent</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title=""><i class="icon-plus"></i></a>
+
+                            <ul class="dropdown-menu pull-right">
+                                <li><a class="" title="" id="photoBtn" data-original-title="Take Photo"><i class="icon-camera-retro"></i> Take Photo</a></li>
+                                <li><a class="" title="" id="videoBtn" data-original-title="Capture Video"><i class="icon-facetime-video"></i> Capture Video</a></li>
+                                <li><a class="" title="" id="audioBtn" data-original-title="Capture Audio"><i class="icon-music"></i> Capture Audio</a></li>
                                 <li>
-                                    <a class="" title="" id="pictureBtn" data-original-title="Insert picture (or just drag &amp; drop)"><i class="icon-picture"></i> Insert Picture</a>
+                                    <a class="" title="" id="fileBtn" data-original-title="Attach File (or just drag &amp; drop)"><i class="icon-file-alt"></i> Attach File</a>
                                     <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" style="opacity: 0; position: absolute; margin-top: -26px; left: 0px; width: 160px; height: 26px;">
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                     <div id="editor"></div>
 
                     <div><input type="text" name="tags" placeholder="Tags" class="input-block-level" id="tags"></div>
-                </form>
-            </div>
-
-            <div class="hide links" role="screen">
-                <form method="POST" action="#">
-                    <div><input type="text" placeholder="Name" name="name"></div>
-                    <div><input type="text" placeholder="Link" name="link"></div>
-                    <div><textarea name="note" placeholder="Notes..." style="height: 150px;"></textarea></div>
-                    <div><input type="text" name="tags" placeholder="Tags"></div>
                 </form>
             </div>
 
