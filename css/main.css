@@ -1,17 +1,20 @@
 .header header {
+    /*
     background: url("../images/header.png") repeat-x scroll 0 0 / auto 100% transparent;
+    */
+    background: url("../images/header.png") repeat-x scroll 0 0;
     border: medium none;
     color: #FFFFFF;
-    height: 4rem;
+    height: 64px;
     padding: 0 10px;
 }
 
 .header header:after {
-    background: url("../images/header-shadow.png") repeat-x scroll 0 0 / auto 100% transparent;
+    background: url(../images/header-shadow.png) repeat-x 0 0;
     content: "";
     display: block;
     height: 0.3rem;
-    top: 4rem;
+    top: 63px;
     right: 0;
     left: 0;
     position: absolute;
@@ -178,4 +181,11 @@ footer {
 
 #home-nav > li {
     margin: 10px;
+}
+
+#editor {
+    overflow-y: scroll;
+    overflow-x: visible;
+    max-height:300px;
+    margin-bottom: 10px;
 }

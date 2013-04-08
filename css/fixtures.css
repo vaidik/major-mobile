@@ -1,9 +1,14 @@
 /* Bootstrap Fixtures */
+/*
 textarea, input[type=text] {
     width: calc(100% - 14px) !important;
     width: -webkit-calc(100% - 14px) !important;
     width: -moz-calc(100% - 14px) !important;
     width: -o-calc(100% - 14px) !important;
+}
+*/
+textarea, input[type=text] {
+    width: 100% !important;
 }
 
 .modal {

@@ -10,8 +10,11 @@
 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap-wysiwyg/bootstrap-wysiwyg.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/fixtures.css">
+    <link rel="stylesheet" href="select2/select2.css">
+    <link rel="stylesheet" href="select2/select2-bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 
@@ -32,17 +35,58 @@
                 <ul id="home-nav" class="nav">
                     <li><a class="btn" id="notes">Create Note</a></li>
                     <li><a class="btn" id="links">Save Link</a></li>
-                    <li><a class="btn">Take Photo</a></li>
+                    <li><a class="btn" id="photo">Take Photo</a></li>
                     <li><a class="btn">Record Audio</a></li>
                     <li><a class="btn">Record Video</a></li>
                 </ul>
             </div>
+            <img src="" id="myImage">
 
             <div class="hide notes" role="screen">
                 <form method="POST" action="#">
-                    <div><input type="text" placeholder="Name" name="name"></div>
+                    <div><input type="text" placeholder="Name" name="name" class="input-block-level"></div>
+                    <!--
                     <div><textarea name="note" placeholder="Notes..." style="height: 150px;"></textarea></div>
-                    <div><input type="text" name="tags" placeholder="Tags"></div>
+                    -->
+                    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+                                <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+                                <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group">
+                            <a class="btn" data-edit="bold" title="" data-original-title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+                            <a class="btn" data-edit="italic" title="" data-original-title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+                            <a class="btn" data-edit="underline" title="" data-original-title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+                        </div>
+
+                        <div class="btn-group">
+                            <a class="btn" data-edit="insertunorderedlist" title="" data-original-title="Bullet list"><i class="icon-list-ul"></i></a>
+                            <a class="btn" data-edit="insertorderedlist" title="" data-original-title="Number list"><i class="icon-list-ol"></i></a>
+                        </div>
+
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="More Options">More <b class="caret"></b></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a data-edit="strikethrough" title="" data-original-title="Strikethrough"><i class="icon-strikethrough"></i> Strike Through</a></li>
+                                <li><a class="" data-edit="indent" title="" data-original-title="Indent (Tab)"><i class="icon-indent-right"></i> Indent</a></li>
+                                <li><a class="" data-edit="outdent" title="" data-original-title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i> Outdent</a></li>
+                                <li>
+                                    <a class="" title="" id="pictureBtn" data-original-title="Insert picture (or just drag &amp; drop)"><i class="icon-picture"></i> Insert Picture</a>
+                                    <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" style="opacity: 0; position: absolute; margin-top: -26px; left: 0px; width: 160px; height: 26px;">
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div id="editor"></div>
+
+                    <div><input type="text" name="tags" placeholder="Tags" class="input-block-level" id="tags"></div>
                 </form>
             </div>
 
@@ -101,9 +145,15 @@
         </footer>
     </div>
 
+    <script type="text/javascript" src="js/cordova-2.5.0.js"></script>
     <script type="text/javascript" src="js/vendor/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/vendor/jquery.history.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="bootstrap-wysiwyg/jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script type="text/javascript" src="select2/select2.js"></script>
     <script type="text/javascript" src="js/screen.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
+
