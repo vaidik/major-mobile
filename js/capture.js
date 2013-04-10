@@ -12,7 +12,6 @@ var Capture = function() {
         });
 
         function onSuccess(imageURI) {
-            alert(imageURI);
             // copy to app's data directory
             FS().moveFile(imageURI, "Major", new Date().getTime() + ".jpg",
                 function(fileEntry) {
@@ -35,10 +34,11 @@ var Capture = function() {
                 fileEntry = mediaFiles[i];
 
                 // copy to app's data directory
-                FS().moveFile(fileEntry.fullPath, "Major", fileEntry.name);
-            }
+                FS().moveFile(fileEntry.fullPath, "Major", fileEntry.name, function(fileEntry) {
+                    capture.add_to_attachments('audio', fileEntry.fullPath);
+                });
 
-            capture.add_to_attachments('audio');
+            }
         }
 
         function onFail(error) {
@@ -53,10 +53,10 @@ var Capture = function() {
                 fileEntry = mediaFiles[i];
 
                 // copy to app's data directory
-                FS().moveFile(fileEntry.fullPath, "Major", fileEntry.name);
+                FS().moveFile(fileEntry.fullPath, "Major", fileEntry.name, function(fileEntry) {
+                    capture.add_to_attachments('video', fileEntry.fullPath);
+                });
             }
-
-            capture.add_to_attachments('video');
         };
 
         // capture error callback
@@ -91,6 +91,8 @@ var Capture = function() {
             $element.append('<i class="icon-file-alt"></i>');
         }
 
+        $element.attr('data-uri', source);
+
         // TODO
         // Add data attribute for every element
 
@@ -104,10 +106,22 @@ var Capture = function() {
                 $img_element.width(58);
                 $img_element.height(58 / ratio);
             }
+            $element.click(function() {
+                alert('Working on to get a good image viewer here.');
+            });
+        } else {
+            $element.click(capture.play);
         }
 
         // resize attachments for horizontal scrolling
         $attachments.width(($('img,div', $attachments).length * 64) + 50);
+    }
+
+    capture.play = function() {
+        var $this = $(this);
+        var uri = $this.attr('data-uri');
+
+        window.plugins.videoPlayer.play(uri);
     }
 
     return capture;
