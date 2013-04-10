@@ -189,3 +189,37 @@ footer {
     max-height:300px;
     margin-bottom: 10px;
 }
+
+.notes #attachments {
+    max-height: 60px;
+    overflow-y: hidden;
+    /*
+    overflow-x: scroll;
+    */
+}
+
+.notes #attachments .attachments-inner > * {
+    margin-right: 4px;
+}
+
+.item {
+    display: inline-block;
+    height: 58px;
+    width: 58px;
+    text-align: center;
+    background-color: rgb(243, 243, 243);
+    border: 1px solid silver;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.item img {
+    max-width: none;
+}
+
+.item i {
+    color: rgb(138, 137, 137);
+    font-size: 28px;
+    display: inline-block;
+    margin-top: 14px;
+}
