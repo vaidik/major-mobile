@@ -97,6 +97,7 @@ var Capture = function() {
         // Add data attribute for every element
 
         $attachments.append($element);
+        var shortpress;
         if (type == 'image') {
             var ratio = $img_element.width()/$img_element.height();
             if ($img_element.width() >= $img_element.height()) { 
@@ -106,15 +107,40 @@ var Capture = function() {
                 $img_element.width(58);
                 $img_element.height(58 / ratio);
             }
-            $element.click(function() {
-                alert('Working on to get a good image viewer here.');
-            });
+
         } else {
-            $element.click(capture.play);
+            shortpress = capture.play;
         }
 
-        // resize attachments for horizontal scrolling
+        $element.longpress(function() {
+            var response = confirm('Sure you want to delete this file? This can\'t be undone.');
+            if (response == true) {
+                capture.remove_attachment($element);
+            }
+        }, shortpress);
+
+        update_attachments_width($attachments);
+    }
+
+    // resize attachments for horizontal scrolling
+    function update_attachments_width($attachments) {
+        if (typeof $attachments === "undefined") {
+            var $attachments = $('#attachments .attachments-inner');
+        }
         $attachments.width(($('img,div', $attachments).length * 64) + 50);
+    }
+
+    capture.remove_attachment = function($element) {
+        var uri = $element.attr('data-uri');
+
+        // remove the element from DOM
+        $element.remove();
+
+        // update the attachments inner div size
+        update_attachments_width();
+
+        // remove the file from filesystem
+        FS().removeFile(uri);
     }
 
     capture.play = function() {

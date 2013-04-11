@@ -20,22 +20,6 @@
         screen().switch($(this).attr('id'));
         $('#button-left').show();
         $('#button-right').show();
-
-        if (id == 'photo') {
-navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    destinationType: Camera.DestinationType.DATA_URL
- }); 
-
-function onSuccess(imageData) {
-    var image = document.getElementById('myImage');
-    image.src = "data:image/jpeg;base64," + imageData;
-}
-
-function onFail(message) {
-    alert('Failed because: ' + message);
-}
-        }
-        //History.pushState({state:1}, "Notes", "notes");
     });
 
     $('[role=toolbar] ul li').click(function() {
