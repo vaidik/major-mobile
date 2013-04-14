@@ -17,7 +17,9 @@
 
     $('#home-nav li a').click(function() {
         var id = $(this).attr('id');
-        screen().switch($(this).attr('id'));
+        screen().switch($(this).attr('id'), function() {
+            get_tags();
+        });
         $('#button-left').show();
         $('#button-right').show();
     });
@@ -43,11 +45,72 @@
     });
 }(window));
 
+function url(uri) {
+    var HOST = 'http://192.168.2.12:8000';
+    return HOST + uri;
+}
+
+/**
+ * get latest tags from the server and update auto complete
+ */
+function get_tags() {
+    $.ajax({
+        url: url('/api/tag'),
+        success: function(data) {
+            var tags = [];
+            for (tag in data.objects) {
+                tags.push(data.objects[tag].tag);
+            }
+
+            $('#tags').select2({
+                tags: tags,
+                tokenSeparators: [",", " "],
+            });
+        },
+    });
+}
+
 $(document).ready(function() {
     $('#editor').wysiwyg();
 
-    $('#tags').select2({
-        tags: ["red", "green", "blue"],
-        tokenSeparators: [",", " "],
+    $('#button-right').click(function() {
+        var $form = $('.notes form');
+        var form_data = {
+            'user': 1,
+            'name': $('[name=name]', $form).val(),
+            'note': $('#editor').cleanHtml(),
+            'tags': [],
+        };
+
+        var tags = $('[name=tags]', $form).val().split(',');
+        for (tag in tags) {
+            form_data.tags.push({ tag: tags[tag] });
+        }
+
+        $.ajax({
+            url: url('/api/note/'),
+            data: JSON.stringify(form_data),
+            type: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+        });
     });
 });
+
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};

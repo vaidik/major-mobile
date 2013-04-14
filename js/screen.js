@@ -1,7 +1,11 @@
 function screen() {
     var screen = {};
     
-    screen.switch = function(className, switchNav) {
+    screen.switch = function(className, switchNav, callback) {
+        if (typeof switchNav == "function") {
+            var callback = switchNav;
+        }
+
         if (!switchNav) {
             navigation().switch(className);
         }
@@ -9,6 +13,9 @@ function screen() {
         $('[role=screen]').addClass('hide');
         $('.' + className).removeClass('hide');
 
+        if (typeof callback !== "undefined") {
+            callback();
+        }
         return screen;
     }
 
