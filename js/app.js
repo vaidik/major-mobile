@@ -18,12 +18,12 @@
     $('#home-nav li a').click(function() {
         var id = $(this).attr('id');
         screen().switch($(this).attr('id'), function() {
-            get_tags();
         });
         $('#button-left').show();
         $('#button-right').show();
     });
 
+    /*
     $('[role=toolbar] ul li').click(function() {
         var id = $('i', this).attr('id');
         screen().switch(id);
@@ -36,6 +36,7 @@
         $('#button-left').css('display', 'none');
         $('#button-right').css('display', 'none');
     });
+    */
 
     $('#button-left').click(function() {
         $('#button-left, #button-right').css('display', 'none');
@@ -47,6 +48,7 @@
 
 function url(uri) {
     var HOST = 'http://192.168.2.12:8000';
+    //var HOST = 'http://172.16.92.178:8000';
     return HOST + uri;
 }
 
@@ -70,33 +72,147 @@ function get_tags() {
     });
 }
 
+function save_note(callback) {
+    var $form = $('.notes form');
+    var form_data = {
+        'user': 1,
+        'name': $('[name=name]', $form).val(),
+        'note': $('#editor').cleanHtml(),
+        'tags': [],
+    };
+
+    var tags = $('[name=tags]', $form).val().split(',');
+    for (tag in tags) {
+        form_data.tags.push({ tag: tags[tag] });
+    }
+
+    var type = 'POST';
+    var submit_url = '/api/note/';
+    if ($('.notes form').attr('data-mode') == 'edit') {
+        $('.notes form').attr('data-mode', '');
+        type = 'PUT';
+        submit_url += $('.notes form').attr('data-note-id') + '/';
+        form_data.id = $('.notes form').attr('data-note-id');
+    }
+
+    $.ajax({
+        url: url(submit_url),
+        data: JSON.stringify(form_data),
+        type: type,
+        headers: {
+            'content-type': 'application/json',
+        },
+        success: function(data) {
+            if (typeof callback !== "undefined") {
+                callback();
+            }
+
+            reset_editor();
+            $("html, body").animate({ scrollTop: 0 }, "fast");
+        },
+    });
+};
+
+function reset_editor() {
+    $('.notes form')[0].reset();
+    $('#editor').html('');
+    $('#attachments .attachments-inner').html('')
+                                        .css('width', '');
+}
+
 $(document).ready(function() {
     $('#editor').wysiwyg();
 
-    $('#button-right').click(function() {
-        var $form = $('.notes form');
-        var form_data = {
-            'user': 1,
-            'name': $('[name=name]', $form).val(),
-            'note': $('#editor').cleanHtml(),
-            'tags': [],
-        };
+    $('#button-right').click(save_note);
 
-        var tags = $('[name=tags]', $form).val().split(',');
-        for (tag in tags) {
-            form_data.tags.push({ tag: tags[tag] });
-        }
+    /*
+    screen().switch('list', function() {
+        $('.screen-container').css('padding', 0);
+    });
+    */
 
-        $.ajax({
-            url: url('/api/note/'),
-            data: JSON.stringify(form_data),
-            type: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
+    $('.notes-toolbar #save').click(function() {
+        save_note(function() {
+            screen().switch('list');
         });
     });
+
+    $('.notes-toolbar #cancel').click(function() {
+        if (confirm('Are you sure you want to go back? All the changes will be discarded.')) {
+            screen().switch('list');
+        }
+    });
+
+    Hooks.call('screen_list');
 });
+
+function get_list() {
+    $.ajax({
+        url: url('/api/note/?sort_by=-id'),
+        success: function(data) {
+            $('.list ul').html('');
+            for (item in data.objects) {
+                var obj = data.objects[item];
+                add_item(obj);
+            }
+
+            $('.list ul > li').click(function() {
+                var $this = $(this)
+                var id = $this.attr('data-note-id');
+
+                $.ajax({
+                    url: url('/api/note/' + id + '/'),
+                    success: function(data) {
+                        $('.notes form').attr('data-mode', 'edit');
+                        $('.notes form').attr('data-note-id', data.id);
+
+                        screen().switch('notes', function() {
+                            var $form = $('.notes form');
+                            $('[name=name]', $form).val(data.name);
+                            $('#editor', $form).html(data.note);
+
+                            var tags = data.tags;
+                            var select_tags = [];
+                            for (tag in tags) {
+                                select_tags.push({
+                                    id: tags[tag].tag,
+                                    text: tags[tag].tag,
+                                });
+
+                                if (tag == tags.length - 1)
+                                {
+                                    window.setTimeout(function() {
+                                        $('[name=tags]', $form).select2("data", select_tags);
+                                    }, 50);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        },
+    });
+
+    function add_item(obj) {
+        var name = obj.name.trunc(15);
+        if (obj.name == '') {
+            name = obj.note.trunc(15);
+        }
+
+        var markup = '<li data-note-id="' + obj.id + '">';
+        markup += '<div class="side-box thumb"><i class="icon-file-alt"></i></div>' 
+        + '<div class="content">'
+        + '<div class="name">' + name + '</div>'
+        + '<p>' + obj.note + '</p>'
+        + '</div>'
+        + '<div class="side-box tags">'
+        + '</div>'
+        + '<div style="clear:both;"></div>'
+        + '</li>';
+
+        $('.list ul').append(markup);
+    }
+}
 
 $.fn.serializeObject = function()
 {
@@ -114,3 +230,34 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+
+String.prototype.trunc = function(n){
+    return this.substr(0,n-1)+(this.length>n?'&hellip;':'');
+};
+
+function screen_notes_hook() {
+    $('.quick').fadeOut(200);
+    $('.notes-toolbar').delay(100).fadeIn(200);
+    $('[role=toolbar]').animate({
+        height: '42px',
+    }, 400);
+}
+Hooks.register('screen_notes', screen_notes_hook);
+
+Hooks.register('screen_notes', function() {
+    get_tags();
+});
+
+function screen_list_toolbar_hook() {
+    $('.notes-toolbar').fadeOut(200);
+    $('[role=toolbar]').animate({
+        height: '80px',
+    }, 400);
+    $('.quick').delay(100).fadeIn(200);
+}
+Hooks.register('screen_list', screen_list_toolbar_hook);
+
+Hooks.register('screen_list', function() {
+    get_list();
+    reset_editor();
+});

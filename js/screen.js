@@ -16,6 +16,8 @@ function screen() {
         if (typeof callback !== "undefined") {
             callback();
         }
+
+        Hooks.call('screen_' + className);
         return screen;
     }
 
@@ -27,8 +29,10 @@ function navigation() {
     var $li = $('[role=toolbar] ul.nav li');
 
     navigation.switch = function(id) {
+        /*
         navigation.empty();
         $('#' + id, $li).parent().addClass('active');
+        */
         
         return navigation;
     }

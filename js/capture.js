@@ -154,15 +154,17 @@ var Capture = function() {
 }
 
 (function() {
-    $('#photoBtn').click(function() {
+    var $notes = $('.notes');
+
+    $('#photoBtn', $notes).click(function() {
         Capture.takePhoto();
     });
 
-    $('#audioBtn').click(function() {
+    $('#audioBtn', $notes).click(function() {
         Capture.recordAudio();
     });
 
-    $('#videoBtn').click(function() {
+    $('#videoBtn', $notes).click(function() {
         Capture.recordVideo();
     });
 }());
