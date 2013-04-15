@@ -156,8 +156,21 @@ function get_list() {
                 add_item(obj);
             }
 
+            $('.list ul > li').longpress(function() {
+                if (confirm("Are you sure you want to delete this note?")) {
+                    $.ajax({
+                        url: url('/api/note/' + $(this).attr('data-note-id') +  '/'),
+                        method: 'DELETE',
+
+                        success: function(data) {
+                            get_list();
+                        },
+                    });
+                }
+            });
+
             $('.list ul > li').click(function() {
-                var $this = $(this)
+                var $this = $(this);
                 var id = $this.attr('data-note-id');
 
                 $.ajax({
